@@ -1,3 +1,6 @@
+#This is an unfinished file.
+#This is an deep learning module that can provide the most important stuff for the main project of IA (small).
+
 class IA:
 	def __init__(self, nb_lay, deep_lay, len_outputs):
 		super(IA, self).__init__()
