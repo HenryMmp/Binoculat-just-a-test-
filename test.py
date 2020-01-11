@@ -80,7 +80,12 @@ class IA:
 		return solutions 
 
 if __name__ == '__main__':
-
+	'''
+	If you want to use the rules.json , use this code
+	
+	from json import load
+	rules = load(open('rules.json'))
+	'''
 	rules = {
 		'rules' : [
 			[[55, -16, 0.5, 1, 9], [0.8, 0.6, 0.2]],
