@@ -106,11 +106,6 @@ if __name__ == '__main__':
 		rules['lenght of outputs'],
 	)
 
-	'''result = ia.test(
-		rules['rules'][0][0], rules['rules'][0][1], 
-		rules['deep of presition'], 
-		rules['rate of similarity']
-	)'''
 
 	ia.learn(
 		rules['rules'],
