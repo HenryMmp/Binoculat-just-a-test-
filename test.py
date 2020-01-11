@@ -1,9 +1,9 @@
 #This is an unfinished file.
 #This is an deep learning module that can provide the most important stuff for the main project of IA (small).
 
-class IA:
+class DeepLearn:
 	def __init__(self, nb_lay, deep_lay, len_outputs):
-		super(IA, self).__init__()
+		super(DeepLearn, self).__init__()
 
 		self.nb_lay = nb_lay
 		self.deep_lay = deep_lay
@@ -95,7 +95,7 @@ if __name__ == '__main__':
 		'rate of similarity' : 0.01,
 	}
 
-	ia = IA(
+	ia = DeepLearn(
 		rules['numbre of layers'], 
 		rules['lenght of each layers'],
 		rules['lenght of outputs'],
