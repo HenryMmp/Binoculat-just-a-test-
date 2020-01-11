@@ -1,0 +1,14 @@
+{
+	"rules" : [
+		[[55, -16, 0.5, 1, 9], [0.8, 0.6, 0.2]],
+	],
+
+	"deep of presition" : 10,
+
+	"numbre of layers" : 2,
+	"lenght of each layers" : 2,
+	"lenght of outputs" : 3,
+
+	"rate of similarity" : 0.01,
+	
+}
