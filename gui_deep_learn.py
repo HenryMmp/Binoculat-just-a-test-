@@ -7,7 +7,7 @@ class Gui:
 
 		self.root = Tk()
 		self.root.title('Deep learning algorithme')
-		self.root.geometry('350x100')
+		self.root.geometry('350x150')
 
 		self.ia = IA(
 			rules['numbre of layers'], 
@@ -72,6 +72,17 @@ class Gui:
 			relief=GROOVE,
 		).pack()
 
+		self.btn_full_random = Button(
+			self.root, 
+			text='full_random (It might be very good)',
+			command=lambda: self.ia.run_thread(lambda:self.ia.full_random(
+				rules=rules['rules'],
+				rate_similarity=rules['rate of similarity'],
+			)),
+			width=50,
+			relief=GROOVE,
+		).pack()
+
 		self.root.mainloop()
 
 if __name__ == '__main__':
@@ -80,5 +91,14 @@ if __name__ == '__main__':
 	from sys import argv
 	rules = load(open(argv[1]))
 
-	Gui(rules)
+	gui = Gui(rules)
+
+	print('\n')
+
+	out = ''
+	while out != 'sure':
+		file = input('Save to (re-writing)>')
+		out = input('Are you sure ? (type :sure) >')
+
+	open('file', 'w').write('\n'.join(['\n'.join(gui.ia.layers), gui.ia.outputs]))
 
