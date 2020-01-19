@@ -1,0 +1,17 @@
+{
+	"lenght of outputs" : 3,
+
+	"rules" : [
+		[[0.0, 0.0], [1.0, 0.0, 0.0]],
+		[[1.0, 1.0], [0.0, 0.0, 1.0]],
+		[[2.0, 2.0], [0.0, 0.0, 0.0]]
+	],
+
+	"deep of presition" : 5,
+
+	"numbre of layers" : 1,
+	"lenght of each layers" : 2,
+
+	"rate of similarity" : 0.1
+
+}
