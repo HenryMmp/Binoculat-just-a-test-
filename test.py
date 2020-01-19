@@ -170,7 +170,7 @@ class IA(Thread):
 
 			stdout.flush()
 
-	def learn_by_experiance_1(self, rules):
+	def learn_by_experiance_1(self, rules, rate_similarity=0.1):
 		'''
 			The main goal of this function is to provide a fast deep learning trainner.
 		'''
@@ -179,20 +179,67 @@ class IA(Thread):
 
 		diff = lambda lst1, lst2: sum([abs(lst1[x]-lst2[x]) for x in range(len(lst1))])
 
-		def test_param(link, add):
-			befor = sum([diff(rule[1], self.compute(rule[0])) for rule in rules])
+		def test_param(link, pos, add, error_skipping=1):
+			if add:
+				if   len(pos)==2: x, y = pos
+				elif len(pos)==1: x = pos[0]
 
-			while befor >= sum([diff(rule[1], self.compute(rule[0])) for rule in rules]):
 				befor = sum([diff(rule[1], self.compute(rule[0])) for rule in rules])
-				link += add
 
-			link -= add
+				while error_skipping > 0:
+					befor = sum([diff(rule[1], self.compute(rule[0])) for rule in rules])
+
+					if   len(pos)==2: link[x][y] += add
+					elif len(pos)==1: link[x]  += add
+
+					if befor <= sum([diff(rule[1], self.compute(rule[0])) for rule in rules]):
+						error_skipping -= 1
+					else:pass
+						#stdout.write(f'\r Find a good direction : {sum([diff(rule[1], self.compute(rule[0])) for rule in rules])} for {add=}')
+
+				if   len(pos)==2: link[x][y] -= add
+				elif len(pos)==1: link[x]  -= add
+
+
+
+		def randomise():
+			self.layers = [[randint(-20, 20)/10 for y in range(len(self.layers[x]))] for x in range(len(self.layers))]
+			self.outputs = [randint(-20, 20)/10 for i in range(len(self.outputs))]
+
+		while sum([diff(rule[1], self.compute(rule[0])) for rule in rules]) > 1:
+			randomise()
+			stdout.write(f'\r[Stat] Finding a correct random wide...    ({sum([diff(rule[1], self.compute(rule[0])) for rule in rules])})')
+		stdout.write('\r[Ok] Find a correct random wide')
+		print('')
 
 		while sum([int(self.correspond_to(self.compute(inputs), to_get, rate_similarity)) for inputs, to_get in rules]) != len(rules):
-			for i in range(len(self.layers)):
-				for j in range(len(self.layers[i])):
-					test_param()
+			for add in range(200):
+				for i in range(len(self.layers)):
+					for j in range(len(self.layers[i])):
+						test_param(self.layers, (i,j), add/10)
+						test_param(self.layers, (i,j), -add/10)
 
+			for add in range(200):
+				for i in range(len(self.outputs)):
+					test_param(self.outputs, (i,), add/10)
+					test_param(self.outputs, (i,), -add/10)
+
+
+			stdout.write(f'\rDiffecrance : {sum([diff(rule[1], self.compute(rule[0])) for rule in rules])}')
+
+	def full_random(self, rules, rate_similarity):
+
+		print('[Ok] Learning Randomly')
+
+		diff = lambda lst1, lst2: sum([abs(lst1[x]-lst2[x]) for x in range(len(lst1))])
+
+		while sum([int(self.correspond_to(self.compute(inputs), to_get, rate_similarity)) for inputs, to_get in rules]) != len(rules):
+			self.layers = [[randint(-20, 20)/10 for y in range(len(self.layers[x]))] for x in range(len(self.layers))]
+			self.outputs = [randint(-20, 20)/10 for i in range(len(self.outputs))]
+
+			stdout.write(f'\r[Stat] Finding a correct random wide...    ({sum([diff(rule[1], self.compute(rule[0])) for rule in rules])})')
+		stdout.write('\r[Ok] Find a correct random wide')
+		print('')
 
 
 	def learn_by_solving(self, rules, deep=5, error_rate=0.01):
@@ -253,7 +300,13 @@ if __name__ == '__main__':
 
 	ia.learn_by_experiance_1(
 		rules=rules['rules'],
+		rate_similarity=rules['rate of similarity'],
 	)
+
+	'''ia.full_random(
+		rules=rules['rules'],
+		rate_similarity=rules['rate of similarity'],
+	)'''
 
 	print(ia)
 
@@ -262,6 +315,10 @@ if __name__ == '__main__':
 	for inputs, outputs in rules['rules']:
 		print(f'Inputs : {inputs}, outputs want : {outputs}.  Outputs get : {ia.compute(inputs)}')
 
-	file = input('Save to (re-writing)>')
+	print('\n')
+	out = ''
+	while out != 'sure':
+		file = input('Save to (re-writing)>')
+		out = input('Are you sure ? (type :sure) >')
 
-	open('file', 'w').write('\n'.join(['\n'.join(self.layers), self.outputs]))
+	open('file', 'w').write('\n'.join(['\n'.join(ia.layers), ia.outputs]))
