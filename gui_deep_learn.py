@@ -1,4 +1,4 @@
-from tkinter import Tk, Button
+from tkinter import Tk, Button, GROOVE
 from test import IA
 
 class Gui:
@@ -27,6 +27,7 @@ class Gui:
 				deep=rules['deep of presition'],
 			)),
 			width=50,
+			relief=GROOVE,
 		).pack()
 
 		self.btn_solve = Button(
@@ -36,6 +37,7 @@ class Gui:
 				rules['rules'],
 			)),
 			width=50,
+			relief=GROOVE,
 		).pack()
 
 		self.btn_experiance_once = Button(
@@ -46,6 +48,7 @@ class Gui:
 				add=0.1,
 			)),
 			width=50,
+			relief=GROOVE,
 		).pack()
 
 		self.btn_experiance_classic = Button(
@@ -56,6 +59,7 @@ class Gui:
 				rate_similarity=rules['rate of similarity'],
 			)),
 			width=50,
+			relief=GROOVE,
 		).pack()
 
 		self.btn_experiance_classic = Button(
@@ -65,6 +69,7 @@ class Gui:
 				rules=rules['rules'],
 			)),
 			width=50,
+			relief=GROOVE,
 		).pack()
 
 		self.root.mainloop()
