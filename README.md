@@ -1,10 +1,26 @@
-# Test of deep learning system for Binocular
+#	Simple Portable Machine Learning Module
 
-This is just a test for the main project (binocular).
+Pseudo-neural-network.
+Trainning on Labeled Data Sets with classic optimization
+methodes like SGD, Momentum, Adam ...
 
-```
-git clone https://github.com/HenryMmp/Binoculat-just-a-test-
-cd Binoculat-just-a-test-
-# After trainnig the programm will request you a file in witch it can store the final struct of the deep learning network
-python3 gui_deep_learn.py rules.json
-```
+##	Math
+
+f(x) = 3x + 1 
+x = 1
+x = x + (want-f(x))*df(x).1
+
+##	Cvs
+Cvs have not to cointain any info on model.
+0.0,0.0;0.0
+1.0,0.0;1.0
+0.0,1.0;1.0
+1.0,1.0;0.0
+=>
+0000000000000000 0000000000000000 
+0000000000000000 0000000000000001
+0000000000000000 0000000000000001
+0000000000000000 0000000000000001
+0000000000000001 0000000000000001
+0000000000000001 0000000000000001
+0000000000000000
