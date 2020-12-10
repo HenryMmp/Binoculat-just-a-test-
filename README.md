@@ -14,7 +14,7 @@ x = x + (want-f(x)) * df(x).1
 Cvs have not to cointain any info on model.
 Example with XOR
 
-0.0,0.0;0.0
-1.0,0.0;1.0
-0.0,1.0;1.0
-1.0,1.0;0.0
+0.0,0.0;0.0 |
+1.0,0.0;1.0 |
+0.0,1.0;1.0 |
+1.0,1.0;0.0 |
